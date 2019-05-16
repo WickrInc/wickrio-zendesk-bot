@@ -8,29 +8,15 @@ var fs = require('fs');
 module.exports = WickrIOAPI;
 process.stdin.resume(); //so the program will not close instantly
 
-function exitHandler(options, err) {
+async function exitHandler(options, err) {
   try {
-    var wickrUsers = bot.getUsers();
-    console.log('wickrUsers:', wickrUsers)
-    bot.saveData(function(result) {
-      console.log(result);
-      if (err) {
-        console.log('Exit error:', err);
-        WickrIOAPI.cmdStopAsyncRecvMessages();
-        console.log(WickrIOAPI.closeClient());
-        process.kill(process.pid);
-        process.exit();
-      }
-      if (options.exit) {
-        WickrIOAPI.cmdStopAsyncRecvMessages();
-        console.log(WickrIOAPI.closeClient());
-        process.exit();
-      } else if (options.pid) {
-        WickrIOAPI.cmdStopAsyncRecvMessages();
-        console.log(WickrIOAPI.closeClient());
-        process.kill(process.pid);
-      }
-    });
+    var closed = await bot.close();
+    if (err || options.exit) {
+      console.log('Exit reason:', err);
+      process.exit();
+    } else if (options.pid) {
+      process.kill(process.pid);
+    }
   } catch (err) {
     console.log(err);
   }
@@ -60,21 +46,26 @@ var tokens = JSON.parse(process.env.tokens);
 
 return new Promise(async (resolve, reject) => {
   try {
+    var status;
     if (process.argv[2] === undefined) {
       bot_username = tokens.BOT_USERNAME.value;
-      var response = WickrIOAPI.clientInit(bot_username);
-      resolve(response);
+      status = await bot.start(bot_username)
+      resolve(status);
     } else {
-      var response = WickrIOAPI.clientInit(process.argv[2]);
-      resolve(response);
+      status = await bot.start(process.argv[2]);
+      resolve(status);
     }
+
   } catch (err) {
-    console.log(err);
-    process.exit();
+    return console.log(err);
   }
 }).then(async result => {
-  console.log(result)
-  bot.encryptEnv();
+  if (!result) {
+    exitHandler(null, {
+      exit: true,
+      reason: 'Client not able to start'
+    });
+  }
   if (tokens.ZENDESK_USERNAME.encrypted) {
     zendesk_username = WickrIOAPI.cmdDecryptString(tokens.ZENDESK_USERNAME.value);
   } else {
@@ -90,14 +81,13 @@ return new Promise(async (resolve, reject) => {
   } else {
     zendesk_domain_name = tokens.ZENDESK_DOMAIN_NAME.value;
   }
-  // encryptEnv();
   try {
     var client = zendesk.createClient({
       username: zendesk_username,
       token: zendesk_api_token,
       remoteUri: "https://" + zendesk_domain_name + ".zendesk.com/api/v2"
     });
-    console.log("cmdStartAsyncRecvMessages:", WickrIOAPI.cmdStartAsyncRecvMessages(listen));
+    await bot.startListening(listen);
   } catch (err) {
     console.log(err);
     process.exit();
@@ -171,34 +161,7 @@ return new Promise(async (resolve, reject) => {
     var argument = parsedMessage.argument;
     var userEmail = parsedMessage.userEmail;
     var vGroupID = parsedMessage.vgroupid;
-    if (command === '/list') {
-      // var ticketArr = [];
-      // var response;
-      // try {
-      //   // client.useridentities.requestVerification(ticket, function(err, req, result) {
-      //   //   if (err) {
-      //   //     throw err;
-      //   //   }
-      //   if (true) { //if user verified his identity
-      //     client.tickets.listByUserRequested(userID, function(err, req, result) {
-      //       if (err) {
-      //         throw err;
-      //       }
-      //       console.log('client.tickets.listByUserRequested:', JSON.stringify(result, null, 2, true));
-      //       response = JSON.stringify(result, null, 2, true);
-      //     });
-      //   } else {
-      //     response = "failed to verify identity";
-      //   }
-      //   var sMessage = WickrIOAPI.cmdSendRoomMessage(vGroupID, response);
-      //   console.log(sMessage);
-      //   // });
-      // } catch (err) {
-      //   console.log(err);
-      // }
-    } else if (command === '/get') {
-      // var ticketNumber = argument;
-    } else if ((command === '/help') || (message === 'help')) {
+    if ((command === '/help') || (message === 'help')) {
       var help = "/help - Lists all available commands\n" +
         "/list - Lists all available tickets(COMING SOON)\n" +
         "/get TICKET_ID - Retrieves the specified ticket(COMING SOON)\n" +
