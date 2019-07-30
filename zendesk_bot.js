@@ -183,8 +183,7 @@ return new Promise(async (resolve, reject) => {
           zendesk_id: "",
           tickets: []
         });
-        bot.addUser(wickrUser);
-        user = bot.getUser(userEmail);
+        user = bot.addUser(wickrUser);
       }
       var current = user.index;
       if (current < responseMessageList.length && current > 0) {
