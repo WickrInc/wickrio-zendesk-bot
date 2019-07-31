@@ -5,6 +5,8 @@
 Use this bot to handle customer support and automatically create Zendesk tickets for users, all without leaving Wickr's secure messaging platform.
 Just plug in your Zendesk account info and the bot will pull all the fields and questions required to submit a Ticket from the pre-configured Zendesk account and will prompt the user to enter them. Once the user confirms the information he entered the bots will submit the ticket to Zendesk.
 
+To get started, you would need to setup your system, download and install Docker and run the WickrIO Docker container. Full instructions on how to do so are available here: https://wickrinc.github.io/wickrio-docs/#wickr-io-getting-started
+
 ## Configuration:
 1. Go into your ZenDesk account and on the left side menu bar select the settings icon
 2. Scroll down and find the "Channels" section, then select "API"
