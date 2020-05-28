@@ -46,8 +46,8 @@ set -e
 cd ..
 echo $PWD
 ls
-rm -rf calendar_bot.old_Version
-mv $OLD_BOT_LOCATION calendar_bot.old_Version
+rm -rf zendesk_bot.old_Version
+mv $OLD_BOT_LOCATION zendesk_bot.old_Version
 
 #
 # Move the NEW installation to the bot's integration directory
