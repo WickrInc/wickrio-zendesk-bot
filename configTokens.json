@@ -4,15 +4,6 @@
     "integration":"WickrIO-Zendesk-Bot",
     "tokens":[
         {
-            "token":"DATABASE_ENCRYPTION_KEY",
-            "pattern":"",
-            "type":"string",
-            "description":"Enter your Database Encryption Key",
-            "message":"Cannot leave DATABASE_ENCRYPTION_KEY empty! Please enter a value",
-            "required":true,
-            "default":"N/A"
-        },
-        {
             "token":"ZENDESK_USERNAME",
             "pattern":"",
             "type":"string",
