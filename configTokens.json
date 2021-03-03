@@ -1,0 +1,34 @@
+{
+    "supportAdministrators":false,
+    "supportVerification":false,
+    "integration":"WickrIO-Zendesk-Bot",
+    "tokens":[
+        {
+            "token":"ZENDESK_USERNAME",
+            "pattern":"",
+            "type":"string",
+            "description":"Enter your Zendesk Username",
+            "message":"Cannot leave ZENDESK_USERNAME empty! Please enter a value",
+            "required":true,
+            "default":"N/A"
+        },
+        {
+            "token":"ZENDESK_API_TOKEN",
+            "pattern":"",
+            "type":"string",
+            "description":"Enter your Zendesk API Token",
+            "message":"Cannot leave ZENDESK_API_TOKEN empty! Please enter a value",
+            "required":true,
+            "default":"N/A"
+        },
+        {
+            "token":"ZENDESK_DOMAIN_NAME",
+            "pattern":"",
+            "type":"string",
+            "description":"Enter your Zendesk Domain Name",
+            "message":"Cannot leave Zendesk Domain Name empty! Please enter a value",
+            "required":true,
+            "default":"N/A"
+        }
+    ]
+}
