@@ -2,9 +2,9 @@
   "uid": "wickrio-zendesk-bot",
   "append": true,
   "watch": false,
-  "main": "./zendesk_bot.js",
+  "script": "./zendesk_bot.js",
   "sourceDir": ".",
-  "logFile": "",
-  "outFile": "",
-  "errFile": ""
+  "logFile": "./log.output",
+  "outFile": "./outfile.output",
+  "errFile": "./err.output"
 }
