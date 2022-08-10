@@ -7,7 +7,7 @@
     "fs": "0.0.2",
     "node-zendesk": "^1.4.0",
     "prompt": "^1.0.0",
-    "wickrio-bot-api": "5.82.x"
+    "wickrio-bot-api": "5.113.x"
   },
   "scripts": {
     "start": "forever start -m 5 ./forever.json",
