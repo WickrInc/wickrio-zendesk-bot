@@ -27,7 +27,8 @@ Required tokens:
 * /get@botName TICKET_ID - Retrieve the specified ticket.(COMING SOON)
 * /resolve@botName TICKET_ID - Resolve the specified ticket.(COMING SOON)
 
-#License
+
+# License
 
 This software is distributed under the [Apache License, version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
 
