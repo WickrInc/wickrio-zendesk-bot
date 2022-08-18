@@ -1,0 +1,10 @@
+{
+  "uid": "wickrio-zendesk-bot",
+  "append": true,
+  "watch": false,
+  "script": "./zendesk_bot.js",
+  "sourceDir": ".",
+  "logFile": "./log.output",
+  "outFile": "./outfile.output",
+  "errFile": "./err.output"
+}
