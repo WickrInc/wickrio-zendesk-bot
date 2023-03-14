@@ -249,7 +249,7 @@ return new Promise(async (resolve, reject) => {
           });
           return;
         } else {
-          var negativeResponse = "Okay, For further assitance you can email our support team at Support@wickr.com.\nYou can also start over again by telling me the issues you've been having?";
+          var negativeResponse = "Okay, For further assitance you can email our support team at wickr-support@amazon.com.\nYou can also start over again by telling me the issues you've been having?";
           user.index = 1; //DOUBLE CHECK THIS, MAYBE SHOULD BE 0 INSTEAD
           return WickrIOAPI.cmdSendRoomMessage(vGroupID, negativeResponse);
         }
