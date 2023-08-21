@@ -1,13 +1,13 @@
 {
   "name": "wickrio-zendesk-bot",
-  "version": "5.82.2",
+  "version": "6.26.1",
   "description": "WickrIO Zendesk Bot allows Wickr users to submit tickets to the configured Zendesk account",
   "main": "zendesk_bot.js",
   "dependencies": {
     "fs": "0.0.2",
     "node-zendesk": "^1.4.0",
     "prompt": "^1.0.0",
-    "wickrio-bot-api": "5.82.x"
+    "wickrio-bot-api": "6.26.x"
   },
   "scripts": {
     "start": "forever start -m 5 ./forever.json",
